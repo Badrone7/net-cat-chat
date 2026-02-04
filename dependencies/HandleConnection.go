@@ -34,9 +34,6 @@ func sendPrompt(conn net.Conn, name string) {
 }
 
 func HandleConnection(conn net.Conn) {
-	if !LimitsCehcker(conn) {
-		return
-	}
 	defer conn.Close()
 	history, err := os.ReadFile("history.txt")
 	if err != nil {
@@ -69,8 +66,10 @@ func HandleConnection(conn net.Conn) {
 			return
 		}
 		name = strings.TrimSpace(input)
-		if name != "" && NameChecker(name) {
+		if name != "" && NameChecker(name) && LimitsChecker(conn) {
 			break
+		} else if !LimitsChecker(conn) {
+			return
 		}
 		conn.Write([]byte("[ENTER YOUR NAME]:"))
 	}
