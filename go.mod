@@ -1,3 +1,3 @@
-module Net-Cat
+module NetCat
 
 go 1.22.3
