@@ -7,7 +7,7 @@ import (
 
 func LimitsChecker(conn net.Conn) bool {
 	mutex.Lock()
-	if len(clients) >= 2 {
+	if len(clients) >= 10 {
 		log.Println("connection rejected: chat room is full")
 		conn.Write([]byte("chat is full. please try again later.\n"))
 		conn.Close()
