@@ -29,3 +29,7 @@ func PersoAtoi(s string) (int, bool) {
 	}
 	return n, true
 }
+
+func LenChecker(name string) bool {
+	return len(name) <= 20
+}

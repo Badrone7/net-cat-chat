@@ -66,10 +66,14 @@ func HandleConnection(conn net.Conn) {
 			return
 		}
 		name = strings.TrimSpace(input)
-		if name != "" && NameChecker(name) && LimitsChecker(conn) {
+		if name != "" && NameChecker(name) && LimitsChecker(conn) && LenChecker(name) && IsAllowedMessage(name) {
 			break
 		} else if !LimitsChecker(conn) {
 			return
+		} else if !LenChecker(name) {
+			conn.Write([]byte("The Name u putted is bigger than 20 characters. Please choose another one.\n"))
+		} else {
+			conn.Write([]byte("This name is Invalid or already taken. Please choose another one.\n"))
 		}
 		conn.Write([]byte("[ENTER YOUR NAME]:"))
 	}
