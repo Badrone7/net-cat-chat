@@ -5,6 +5,7 @@ import (
 	"net"
 )
 
+// Broadcast sends a message to all connected clients except the sender.
 func Broadcast(sender net.Conn, message string) {
 	mutex.Lock()
 	defer mutex.Unlock()

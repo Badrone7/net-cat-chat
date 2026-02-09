@@ -6,6 +6,7 @@ import (
 	"strings"
 )
 
+// AppendToHistory appends a message to the history.txt file in a thread-safe manner.
 func AppendToHistory(message string) {
 	historyMutex.Lock()
 	defer historyMutex.Unlock()
@@ -27,6 +28,7 @@ func AppendToHistory(message string) {
 	}
 }
 
+// Historyclean deletes the history.txt file if it exists and creates a new empty one.
 func Historyclean() {
 	err := os.Remove("history.txt")
 	if err != nil && !os.IsNotExist(err) {

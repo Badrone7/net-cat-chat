@@ -5,6 +5,11 @@ import (
 	"net"
 )
 
+/* LimitsChecker checks if the number of connected clients has reached the limit (10).
+   If the limit is reached, it sends a message to the client and closes the connection.
+   It returns true if the connection is accepted, and false if it is rejected.
+*/
+
 func LimitsChecker(conn net.Conn) bool {
 	mutex.Lock()
 	if len(clients) >= 10 {
@@ -18,6 +23,7 @@ func LimitsChecker(conn net.Conn) bool {
 	return true
 }
 
+// NameChecker checks if the provided name is unique among the connected clients.
 func NameChecker(name string) bool {
 	mutex.Lock()
 	defer mutex.Unlock()
@@ -29,6 +35,7 @@ func NameChecker(name string) bool {
 	return true
 }
 
+// UserDelete removes a client from the clients map when they disconnect.
 func UserDelete(clients map[net.Conn]string, conn net.Conn) {
 	mutex.Lock()
 	defer mutex.Unlock()

@@ -27,12 +27,14 @@ var AllowedChars = []rune(
 
 var historyMutex = &sync.Mutex{}
 
+// IsAllowedMessage checks if the message contains only allowed characters.
 func sendPrompt(conn net.Conn, name string) {
 	tm := time.Now().Format("2006-01-02 15:04:05")
 	prompt := fmt.Sprintf("[%s] [%s]: ", tm, name)
 	conn.Write([]byte(prompt))
 }
 
+// HandleConnection manages an individual client's connection to the chat server.
 func HandleConnection(conn net.Conn) {
 	defer conn.Close()
 	history, err := os.ReadFile("history.txt")
