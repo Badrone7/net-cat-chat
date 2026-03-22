@@ -57,7 +57,6 @@ After starting, the server listens on the specified port and accepts client conn
 
 * **Your Name:** bguitoni
 * **Team Member:** aelyoussef
-* **Gitea Repository:** https://learn.zone01oujda.ma/git/bguitoni/net-cat
 
 ## License
 
